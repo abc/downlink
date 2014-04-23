@@ -6,12 +6,13 @@
 	{
 		public function Downlink()
 		{
+			stt.setOutput("Establishing connection to Downlink public access server...");
 			flashComputer.properties.hostname.text = "user"
 			flashComputer.properties.description.text = "[localhost]"
-				
-			downlinkComputer.properties.hostname.text = "234.773.0.666"
-			downlinkComputer.properties.description.text = "[Downlink public access server]"
-			downlinkComputer.gotoAndStop("Downlink");
+			dlPc.gotoAndStop("Downlink");
+			dlPc.properties.hostname.text = "234.773.0.666"
+			dlPc.properties.description.text = "[Downlink public access server]"
+			
 		}
 	}
 }

@@ -30,5 +30,18 @@
 				this.addChild(newButton);
 			}
 		}
+		
+		public function Type (number:int)
+		{
+			var string = number.toString();
+			for (int i = 0; i < string.length; i++)
+			{
+				switch (string.charAt(i))
+				{
+					case '1':
+						
+				}
+			}
+		}
 	}
 }
