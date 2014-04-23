@@ -4,6 +4,8 @@
 	
 	public class Keypad extends MovieClip
 	{
+		public var buttons:Array = new Array(9);
+		
 		public function Keypad()
 		{
 			super();
@@ -27,20 +29,17 @@
 						newButton.x -= 150;
 					}
 				}
-				this.addChild(newButton);
+				buttons[i] = newButton;
+				this.addChild(buttons[i]);
 			}
 		}
 		
-		public function Type (number:int)
+		public function keyPress (key:String)
 		{
-			var string = number.toString();
-			for (int i = 0; i < string.length; i++)
+			switch (key.charAt(0))
 			{
-				switch (string.charAt(i))
-				{
-					case '1':
-						
-				}
+				case '1':
+					buttons[0].gotoAndStop("off");
 			}
 		}
 	}

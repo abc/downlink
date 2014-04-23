@@ -12,7 +12,7 @@
 			dlPc.gotoAndStop("Downlink");
 			dlPc.properties.hostname.text = "234.773.0.666"
 			dlPc.properties.description.text = "[Downlink public access server]"
-			
+			keypad.keyPress("1");
 		}
 	}
 }
