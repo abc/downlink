@@ -40,7 +40,7 @@
 		private function stage_ENTER_FRAME(event:Event)
 		{
 			addEventListeners();
-			gotoAndStop(0);
+			
 		}
 		
 		private function removeEventListeners()
@@ -82,11 +82,14 @@
 			{
 				trace("woo!");
 			}
+			else
+			{
+				trace("What.");
+			}
 		}
 		
 		private function addEventListeners() : void
 		{
-			trace(this.currentFrameLabel);
 			if (this.currentFrameLabel == "mainmenu.home")
 			{
 				startButton.addEventListener(MouseEvent.CLICK, startButton_CLICK);
@@ -99,15 +102,18 @@
 			}
 			else if (this.currentFrameLabel == "mainmenu.instructions")
 			{
-				backButton.addEventListener(MouseEvent.CLICK, backButton_CLICK);
+				trace(this.currentFrame);
+				// backButton.addEventListener(MouseEvent.CLICK, backButton_CLICK);
 			}
-			else if (this.currentFrameLabel == Level1.Start)
+			else if (this.currentFrameLabel == "level1.start")
 			{
 				this.addChild(mazePlayer);
 				stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard_KEY_DOWN);
 			}
-			else if (this.currentFrameLabel == Level2.Start)
+			else if (this.currentFrameLabel == "level2.start")
 			{
+				trace("at level 2");
+				
 				if (runOnce)
 				{
 					this.addChild(enemy1);
@@ -147,7 +153,6 @@
 					runOnce = false;
 				}
 				
-							
 				stage.addEventListener(MouseEvent.MOUSE_MOVE, level2_KEY_DOWN);	
 					
 				enemy1.x += 15;
@@ -230,6 +235,10 @@
 					gotoAndStop("level3.start");
 				}
 				
+			}
+			else
+			{
+				trace("what");
 			}
 		}
 		
