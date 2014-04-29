@@ -45,7 +45,7 @@
 				{
 					
 					// trace("Added new light at " + i + " , " + j + ".");
-					lights[i][j] = new Light();
+					lights[i][j] = new Light(this);
 					lights[i][j].x = i * 45;
 					lights[i][j].xCoord = i;
 					lights[i][j].yCoord = j;
@@ -77,14 +77,14 @@
 					for (var j = 0; j < YSIZE; j++)
 					{
 						if (Math.random() >= FLIPCHANCE)
-							test (i, j);
+							this.flip (i, j);
 					}
 				}
 			}
 			this.moves = 0;
 		}
 		
-		public function test (x:int, y:int)
+		public function flip (x:int, y:int)
 		{
 			this.moves++;
 			lights[x][y].toggle();

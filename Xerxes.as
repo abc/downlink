@@ -8,8 +8,11 @@
 
 		public function Xerxes()
 		{
-			this.x = 24;
-			this.y = 562;
+			// TODO: Change this to commented out values.
+			// this.x = 24;
+			// this.y = 562;
+			this.x = 180;
+			this.y = 272;
 		}
 	}
 	

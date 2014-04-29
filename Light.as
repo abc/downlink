@@ -6,24 +6,27 @@
 	public class Light extends MovieClip {
 		
 		var status:Boolean = false;
+		var thisParent:MovieClip;
+		
 		
 		var xCoord:int;
 		var yCoord:int;
 		
-		public function Light ()
+		public function Light (parent:MovieClip)
 		{
+			thisParent = parent;
 			stop();
 			this.addEventListener(MouseEvent.CLICK, clickHandler);
 		}
 		
 		public function clickHandler (e:MouseEvent):void
 		{
-			MovieClip(root).test(this.xCoord, this.yCoord);
+			MovieClip(thisParent).flip(this.xCoord, this.yCoord);
 		}
 		
 		public function toggle ()
 		{
-			this.status ? gotoAndStop("Off") : gotoAndStop("On");
+			this.status ? gotoAndStop("off") : gotoAndStop("on");
 			this.status ? this.status = false : this.status = true;
 		}
 	}
