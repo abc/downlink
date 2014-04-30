@@ -9,10 +9,10 @@
 		public function Xerxes()
 		{
 			// TODO: Change this to commented out values.
-			// this.x = 24;
-			// this.y = 562;
-			this.x = 180;
-			this.y = 272;
+			this.x = 24;
+			this.y = 562;
+			// this.x = 180;
+			// this.y = 272;
 		}
 	}
 	

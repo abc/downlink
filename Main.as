@@ -5,9 +5,17 @@
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import flash.media.SoundChannel;
 
 	public class Main extends MovieClip
 	{
+		
+		var soundChannel:SoundChannel = new SoundChannel();
+		
+		var song1:Song1 = new Song1();
+		var song2:Song2 = new Song2();
+		var song3:Song3 = new Song3();
+		var song4:Song4 = new Song4();
 
 		var mazePlayer = new Xerxes();
 		var level2Player = new Level2Player();
@@ -22,10 +30,11 @@
 		var fragment3:circle;
 		var fragment4:pentagon;
 
-		var level2Score = 4;
+		var level2Score = 0;
 
 		public function Main()
 		{
+			soundChannel = song1.play();
 			dispose();
 			gotoAndStop(0);
 			stage.addEventListener(Event.ENTER_FRAME, update);
@@ -56,8 +65,116 @@
 			instructionsButton.removeEventListener(MouseEvent.CLICK, instructionsButton_CLICK);
 		}
 
+		private function initLevelFour () : void
+		{
+			soundChannel.stop();
+			soundChannel = song4.play();
+			l4fragment1.addEventListener(MouseEvent.MOUSE_DOWN, fragment1_MOUSE_DOWN);
+			l4fragment4.addEventListener(MouseEvent.MOUSE_DOWN, fragment4_MOUSE_DOWN);
+			l4fragment3.addEventListener(MouseEvent.MOUSE_DOWN, fragment3_MOUSE_DOWN);
+			l4fragment2.addEventListener(MouseEvent.MOUSE_DOWN, fragment2_MOUSE_DOWN);
+			
+			l4fragment1.addEventListener(MouseEvent.MOUSE_UP, fragment1_MOUSE_UP);
+			l4fragment4.addEventListener(MouseEvent.MOUSE_UP, fragment4_MOUSE_UP);
+			l4fragment3.addEventListener(MouseEvent.MOUSE_UP, fragment3_MOUSE_UP);
+			l4fragment2.addEventListener(MouseEvent.MOUSE_UP, fragment2_MOUSE_UP);
+		}
+		
+		
+		private function fragment1_MOUSE_DOWN			(event:MouseEvent) : void
+		{
+			l4fragment1.startDrag();
+		}
+		private function fragment2_MOUSE_DOWN			(event:MouseEvent) : void
+		{
+			l4fragment2.startDrag();
+		}
+		private function fragment3_MOUSE_DOWN			(event:MouseEvent) : void
+		{
+			l4fragment3.startDrag();
+		}
+		private function fragment4_MOUSE_DOWN			(event:MouseEvent) : void
+		{
+			l4fragment4.startDrag();
+		}
+		
+		private function fragment1_MOUSE_UP			(event:MouseEvent) : void
+		{
+			if (l4fragment1.x >= 300)
+			{
+				if (l4fragment1.y >= 80)
+				{
+					l4fragment1.compileAndLink();
+					l4fragment1.x = 360;
+					l4fragment1.y = 90;
+					l4fragment1.removeEventListener(MouseEvent.MOUSE_UP, fragment1_MOUSE_UP);
+					l4fragment1.removeEventListener(MouseEvent.MOUSE_DOWN, fragment1_MOUSE_DOWN);
+				}
+			}
+			l4fragment1.stopDrag();
+			
+			trace(l4fragment1.x);
+		}
+		private function fragment2_MOUSE_UP			(event:MouseEvent) : void
+		{
+			if (l4fragment1.compiled)
+			{
+				if (l4fragment2.x >= 300)
+				{
+					if (l4fragment2.y >= 80)
+					{
+						l4fragment2.x = 360;
+						l4fragment2.y = 107;
+						l4fragment2.compileAndLink();
+						l4fragment2.removeEventListener(MouseEvent.MOUSE_UP, fragment2_MOUSE_UP);
+						l4fragment2.removeEventListener(MouseEvent.MOUSE_DOWN, fragment2_MOUSE_DOWN);
+					}
+				}
+			}
+			
+			l4fragment2.stopDrag();
+		}
+		private function fragment3_MOUSE_UP			(event:MouseEvent) : void
+		{
+			if ((l4fragment1.compiled) && (l4fragment2.compiled))
+			{
+				if (l4fragment3.x >= 300)
+				{
+					if (l4fragment3.y >= 80)
+					{
+						l4fragment3.x = 380;
+						l4fragment3.y = 122;
+						l4fragment3.compileAndLink();
+						l4fragment3.removeEventListener(MouseEvent.MOUSE_UP, fragment3_MOUSE_UP);
+						l4fragment3.removeEventListener(MouseEvent.MOUSE_DOWN, fragment3_MOUSE_DOWN);
+					}
+				}
+			}
+			l4fragment3.stopDrag();
+		}
+		private function fragment4_MOUSE_UP			(event:MouseEvent) : void
+		{
+			if ((l4fragment1.compiled) && (l4fragment2.compiled) && (l4fragment3.compiled))
+			{
+				if (l4fragment4.x >= 300)
+				{
+					if (l4fragment4.y >= 80)
+					{
+						l4fragment4.x = 400;
+						l4fragment4.y = 137;
+						l4fragment4.compileAndLink();
+						l4fragment4.removeEventListener(MouseEvent.MOUSE_UP, fragment4_MOUSE_UP);
+						l4fragment4.removeEventListener(MouseEvent.MOUSE_DOWN, fragment4_MOUSE_DOWN);
+					}
+				}
+			}
+			l4fragment4.stopDrag();
+		}
+		
 		private function initLevelOne () : void
 		{
+			soundChannel.stop();
+			soundChannel = song2.play();
 			this.addChild(mazePlayer);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard_KEY_DOWN);
 		}
@@ -73,6 +190,8 @@
 
 		private function initLevelTwo() : void
 		{
+			soundChannel.stop();
+			soundChannel = song3.play();
 			enemy1 = new evilsquare();
 			enemy2 = new evilpentagon();
 			enemy3 = new evilcircle();
@@ -323,6 +442,15 @@
 				init();
 			}
 		}
+		
+		private function updateLevelFour () : void
+		{
+			if ((l4fragment1.compiled) && (l4fragment2.compiled) && (l4fragment3.compiled) && (l4fragment4.compiled))
+			{
+				gotoAndStop("victory");
+			}
+		}
+
 
 		private function startButton_CLICK			(event:MouseEvent) : void
 		{
@@ -433,6 +561,9 @@
 					break;
 				case "level2.start":
 					initLevelTwo();
+					break;
+				case "level4.start":
+					initLevelFour();
 					break;
 			}
 		}
