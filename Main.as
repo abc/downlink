@@ -579,6 +579,9 @@
 				case "level3.start":
 					updateLevelThree();
 					break;
+				case "level4.start":
+					updateLevelFour();
+					break;
 			}
 		}
 
